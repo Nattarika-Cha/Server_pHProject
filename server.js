@@ -32,7 +32,7 @@ app.use(
 app.use('/user', registerRouter);
 
 app.get('/', function (req, res) {
-    console.log("testtt");
+    res.json('test path /');
 })
 
 app.listen(PORT, () => {
