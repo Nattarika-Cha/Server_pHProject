@@ -134,21 +134,24 @@ const express = require('express');
 
 const app = express();
 
-// [START hello_world]
-// Say hello!
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://Nattarika:Nattarika0779@cluster0-2pbax.gcp.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("phproject").collection("user");
+  // perform actions on the collection object
+  client.close();
+});
+
 app.get('/', (req, res) => {
   res.status(200).send('Hello, world!');
 });
-// [END hello_world]
 
 if (module === require.main) {
-  // [START server]
-  // Start the server
   const server = app.listen(process.env.PORT || 8080, () => {
     const port = server.address().port;
     console.log(`App listening on port ${port}`);
   });
-  // [END server]
 }
 
 module.exports = app;

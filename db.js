@@ -1,3 +1,3 @@
 module.exports = {
-    DB: 'mongodb://127.0.0.1:27017/project'
+    DB: 'mongodb+srv://Nattarika:Nattarika0779@cluster0-2pbax.gcp.mongodb.net/phproject?retryWrites=true&w=majority'
 }
