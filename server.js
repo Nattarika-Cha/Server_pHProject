@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const request = require('request')
 
 const config = require('./db');
-const PORT = 5000;
+const PORT = 8080;
 
 const cors = require('cors');
 
