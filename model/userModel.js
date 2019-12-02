@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const registerSchema = new Schema({
+const userSchema = new Schema({
     username: {
         type: String,
         required: true
@@ -22,12 +22,16 @@ const registerSchema = new Schema({
         type: String,
         required: true
     },
+    token: {
+        type: String,
+        required: true
+    },
     salt: {
         type: String,
         required: true
     },
 },{
-    collection: 'register'
+    collection: 'user'
 });
 
-module.exports = mongoose.model('register', registerSchema);
+module.exports = mongoose.model('user', userSchema);

@@ -16,7 +16,7 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     err => { console.log('Can not connect to the database' + err) }
 );
 
-const registerRouter = require('./routes/registerRoute');
+const userRouter = require('./routes/userRoute');
 
 // const registerModel = require('./model/registerModel');
 
@@ -29,7 +29,7 @@ app.use(
     })
 )
 
-app.use('/user', registerRouter);
+app.use('/user', userRouter);
 
 app.get('/', function (req, res) {
     res.json('test path /');
