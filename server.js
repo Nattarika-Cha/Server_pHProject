@@ -34,8 +34,20 @@ app.use('/user', userRouter);
 app.get('/', function (req, res) {
     console.log(req.headers.host);
     console.log(req.query);
-    res.json(req.headers.host + " , " + req.query );
+    res.json(req.headers.host + " , " + req.query);
 })
+
+// UDP Server
+var dgram = require('dgram');
+var server = dgram.createSocket('udp4'); server.on('listening', function () {
+    var address = server.address();
+    console.log('UDP Server listening on ' + address.address + ":" + address.port);
+}); server.on('message', function (message, remote) {
+    console.log(remote.address + ':' + remote.port + ' - ' + message);
+});
+
+server.bind(42304, '0.0.0.0');
+// END UDP Server
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
