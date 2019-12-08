@@ -59,7 +59,7 @@ server.on("listening", function () {
 
 server.bind({
     address: '0.0.0.0',
-    port: 7000,
+    port: 8080,
     exclusive: true
 });
 // END UDP Server
