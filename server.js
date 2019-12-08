@@ -38,18 +38,32 @@ app.get('/', function (req, res) {
 })
 
 // UDP Server
-var dgram = require('dgram');
-var server = dgram.createSocket('udp4'); server.on('listening', function () {
-    var address = server.address();
-    console.log('UDP Server listening on ' + address.address + ":" + address.port);
-}); server.on('message', function (message, remote) {
-    console.log(remote.address + ':' + remote.port + ' - ' + message);
-});
+var dgram = require("dgram");
+var server = dgram.createSocket("udp4"); server.on("error", function (err) {
+    console.log("server error:\n" + err.stack);
+    server.close();
+}); 
 
-server.bind(42304, '0.0.0.0');
+server.on("message", function (msg, rinfo) {
+    console.log("server got: " + msg + " from " + rinfo.address + ":" + rinfo.port);
+    var ack = new Buffer("Hello ack");
+    server.send(ack, 0, ack.length, rinfo.port, rinfo.address, function (err, bytes) {
+        console.log("sent ACK.");
+    });
+}); 
+
+server.on("listening", function () {
+    var address = server.address();
+    console.log("server listening " + address.address + ":" + address.port);
+}); 
+
+server.bind({
+    address: '0.0.0.0',
+    port: 7000,
+    exclusive: true
+});
 // END UDP Server
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
 });
-
