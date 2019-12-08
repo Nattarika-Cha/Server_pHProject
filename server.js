@@ -32,6 +32,8 @@ app.use(
 app.use('/user', userRouter);
 
 app.get('/', function (req, res) {
+    console.log(req.headers.host);
+    console.log(req.query);
     res.json('test path /');
 })
 
