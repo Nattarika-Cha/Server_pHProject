@@ -46,7 +46,7 @@ server.on("error", function (err) {
 server.on("message", function (msg, rinfo) {
     var str = "" + msg;
     var data = str.split(",");
-    console.log(data[0]);
+    console.log(data[0].slice(0,"."));
     console.log(data[1]);
     console.log(data[2]);
     var insertSenser = {
