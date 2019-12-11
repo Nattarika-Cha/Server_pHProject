@@ -48,7 +48,7 @@ server.on("message", function (msg, rinfo) {
     console.log(data[0]);
     console.log(data[1]);
     console.log(data[2]);
-    //console.log("server got: " + msg + " from " + rinfo.address + ":" + rinfo.port);
+    console.log("server got: " + msg + " from " + rinfo.address + ":" + rinfo.port);
     var ack = new Buffer("Hello ack");
     server.send(ack, 0, ack.length, rinfo.port, rinfo.address, function (err, bytes) {
         console.log("sent ACK.");
