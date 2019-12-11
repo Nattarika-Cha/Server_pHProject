@@ -1,24 +1,17 @@
 const express = require('express');
 const app = express();
-
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
 const request = require('request')
-
-const config = require('./db');
-const PORT = 3030;
-
 const cors = require('cors');
-
+const PORT = 3030;
+const config = require('./db');
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     () => { console.log('Database is connected') },
     err => { console.log('Can not connect to the database' + err) }
 );
 
 const userRouter = require('./routes/userRoute');
-
-// const registerModel = require('./model/registerModel');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -47,7 +40,11 @@ server.on("error", function (err) {
 }); 
 
 server.on("message", function (msg, rinfo) {
-    console.log("server got: " + msg + " from " + rinfo.address + ":" + rinfo.port);
+    var data = msg.split(",");
+    console.log(data[0]);
+    console.log(data[1]);
+    console.log(data[2]);
+    //console.log("server got: " + msg + " from " + rinfo.address + ":" + rinfo.port);
     var ack = new Buffer("Hello ack");
     server.send(ack, 0, ack.length, rinfo.port, rinfo.address, function (err, bytes) {
         console.log("sent ACK.");
