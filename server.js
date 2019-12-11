@@ -15,7 +15,7 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
 const userRouter = require('./routes/userRoute');
 
 //Model
-const senserModel = require('../model/senserModel');
+const senserModel = require('./model/senserModel');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
