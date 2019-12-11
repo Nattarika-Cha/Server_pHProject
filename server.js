@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const request = require('request')
 
 const config = require('./db');
-const PORT = 8080;
+const PORT = 3030;
 
 const cors = require('cors');
 
@@ -39,7 +39,9 @@ app.get('/', function (req, res) {
 
 // UDP Server
 var dgram = require("dgram");
-var server = dgram.createSocket("udp4"); server.on("error", function (err) {
+var server = dgram.createSocket("udp4"); 
+
+server.on("error", function (err) {
     console.log("server error:\n" + err.stack);
     server.close();
 }); 
@@ -59,7 +61,7 @@ server.on("listening", function () {
 
 server.bind({
     address: '0.0.0.0',
-    port: 8080,
+    port: 5001,
     exclusive: true
 });
 // END UDP Server
