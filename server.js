@@ -56,6 +56,7 @@ server.on("message", function (msg, rinfo) {
         'longitude': '',
         'IMEI': data[2],
     };
+    console.log(insertSenser);
 
     const senser = new senserModel(insertSenser);
     senser.save()
