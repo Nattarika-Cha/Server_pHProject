@@ -48,9 +48,6 @@ server.on("message", function (msg, rinfo) {
     var data = str.split(",");
     var pH = data[0].split("");
     pH.splice(1,0,".");
-    console.log(pH[0]);
-    console.log(pH[1]);
-    console.log(pH[2]);
     var insertSenser = {
         'pH': pH[0]+pH[1]+pH[2],
         'moisture': data[1],
@@ -58,7 +55,6 @@ server.on("message", function (msg, rinfo) {
         'longitude': 'test',
         'IMEI': data[2],
     };
-    console.log(insertSenser);
 
     const senser = new senserModel(insertSenser);
     senser.save()
