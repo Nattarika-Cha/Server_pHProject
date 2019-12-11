@@ -52,7 +52,7 @@ server.on("message", function (msg, rinfo) {
     console.log(pH[1]);
     console.log(pH[2]);
     var insertSenser = {
-        'pH': data[0],
+        'pH': pH[0]+pH[1]+pH[2],
         'moisture': data[1],
         'latitude': 'test',
         'longitude': 'test',
