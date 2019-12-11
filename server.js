@@ -40,8 +40,8 @@ server.on("error", function (err) {
 }); 
 
 server.on("message", function (msg, rinfo) {
-    var data = toString(msg).split(",").map(val => Number(val) + 1);
-    console.log(toString(msg).split(",").map(val => Number(val) + 1));
+    var data = toString(msg).split(",").map(val => val + 1);
+    console.log(toString(msg).split(",").map(val => val + 1));
     console.log(JSON.stringify(data));
     console.log(data);
     console.log(data[0]);
