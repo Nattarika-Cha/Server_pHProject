@@ -46,9 +46,9 @@ server.on("error", function (err) {
 server.on("message", function (msg, rinfo) {
     var str = "" + msg;
     var data = str.split(",");
-    console.log(data[0].slice(0,1,"."));
-    console.log(data[1]);
-    console.log(data[2]);
+    var pH = data[0].split("");
+    console.log(pH[0]);
+    console.log(pH[1]);
     var insertSenser = {
         'pH': data[0],
         'moisture': data[1],
