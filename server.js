@@ -41,6 +41,7 @@ server.on("error", function (err) {
 
 server.on("message", function (msg, rinfo) {
     var data = toString(msg).split(",");
+    console.log(toString(msg));
     console.log(JSON.stringify(data));
     console.log(data);
     console.log(data[0]);
