@@ -46,7 +46,8 @@ server.on("error", function (err) {
 server.on("message", function (msg, rinfo) {
     var str = "" + msg;
     var data = str.split(",");
-    var pH = data[0].split("").splice(1,".");;
+    var pH = data[0].split("").splice(1,".");
+    pH.splice(1,".");
     console.log(pH[0]);
     console.log(pH[1]);
     console.log(pH[2]);
