@@ -22,6 +22,10 @@ const configSchema = new Schema({
         type: String,
         required: true
     },
+    humidity: {
+        type: String,
+        required: true
+    },
 },{
     collection: 'config'
 });
