@@ -14,6 +14,7 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
 //Routes
 const userRouter = require('./routes/userRoute');
 const configRouter = require('./routes/configRoute');
+const deviceRouter = require('./routes/deviceRoute');
 
 //Model
 const senserModel = require('./model/senserModel');
@@ -29,6 +30,7 @@ app.use(
 
 app.use('/user', userRouter);
 app.use('/config', configRouter);
+app.use('/device', deviceRouter);
 
 app.get('/', function (req, res) {
     console.log(req.headers.host);
