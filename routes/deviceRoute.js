@@ -29,4 +29,15 @@ deviceRouter.route('/select').post(function (req, res) {
     })
 });
 
+deviceRouter.route('/device_list').get(function (req, res) {
+    deviceModel.find({}, function (err, device) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.json(device);
+        }
+    })
+});
+
 module.exports = deviceRouter;
