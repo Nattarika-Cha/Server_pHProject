@@ -12,7 +12,7 @@ deviceRouter.route('/select').post(function (req, res) {
                 device.save()
                     .then(device => {
                         console.log('Add device success');
-                        res.json('Add device success');
+                        res.json(device);
                     })
                     .catch(err => {
                         res.status(400).send("unable add device to database");
