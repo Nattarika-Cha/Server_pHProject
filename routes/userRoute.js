@@ -105,7 +105,7 @@ userRouter.route('/pro/:username').get(function (req, res) {
         else {
             res.json(user);
         }
-    }
+    });
 });
 
 module.exports = userRouter;
