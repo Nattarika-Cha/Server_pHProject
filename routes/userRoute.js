@@ -97,4 +97,15 @@ userRouter.route('/login').post(function (req, res) {
     });
 });
 
+userRouter.route('/pro/:username').get(function (req, res) {
+    userModel.find({ 'username': req.params.username }, function (err, user) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.json(user);
+        }
+    }
+});
+
 module.exports = userRouter;
