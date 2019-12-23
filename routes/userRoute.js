@@ -97,8 +97,8 @@ userRouter.route('/login').post(function (req, res) {
     });
 });
 
-userRouter.route('/pro/:username').get(function (req, res) {
-    userModel.findOne({ 'username': req.params.username }, function (err, user) {
+userRouter.route('/pro').get(function (req, res) {
+    userModel.findOne({ username: req.query.username }, function (err, user) {
         if (err) {
             console.log(err);
         }
