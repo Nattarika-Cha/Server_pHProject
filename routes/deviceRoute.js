@@ -5,7 +5,7 @@ const deviceRouter = express.Router();
 const deviceModel = require('../model/deviceModel');
 
 deviceRouter.route('/select').post(function (req, res) {
-    deviceModel.findOne({ 'serialQR': req.body.serialQR }), function (err, number) {
+    deviceModel.findOne({ 'serialQR': req.body.serialQR }, function (err, number) {
         if (number != null) {
             res.json('Add device success');
             console.log('Add device success');
@@ -14,7 +14,7 @@ deviceRouter.route('/select').post(function (req, res) {
             res.json('Not Device');
             console.log('Not Device');
         }
-    }
+    })
 });
 
 module.exports = deviceRouter;
