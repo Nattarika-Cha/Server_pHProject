@@ -33,9 +33,8 @@ app.use('/config', configRouter);
 app.use('/device', deviceRouter);
 
 app.get('/', function (req, res) {
-    console.log(req.headers.host);
-    console.log(req.query);
-    res.json(req.headers.host + " , " + req.query);
+    console.log(req);
+    //res.json(req.headers.host + " , " + req.query);
 })
 
 // UDP Server
