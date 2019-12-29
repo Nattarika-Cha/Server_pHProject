@@ -33,7 +33,8 @@ app.use('/config', configRouter);
 app.use('/device', deviceRouter);
 
 app.post('/', function (req, res) {
-    console.log(req);
+    console.log("sent ok");
+    console.log(req.body.DevEUI_uplink.payload_hex);
     //res.json(req.headers.host + " , " + req.query);
 })
 
