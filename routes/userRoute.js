@@ -85,7 +85,7 @@ userRouter.route('/login').post(function (req, res) {
                 var hash_password = checkHashPassword(password, salt).passwordHash;
                 var encrypted_password = user.password;
                 if (hash_password == encrypted_password) {
-                    res.json('Login success');
+                    res.json(user);
                     console.log('Login success');
                 }
                 else {
@@ -93,6 +93,17 @@ userRouter.route('/login').post(function (req, res) {
                     console.log('Wrong password');
                 }
             });
+        }
+    });
+});
+
+userRouter.route('/pro').get(function (req, res) {
+    userModel.findOne({ username: req.query.username }, function (err, user) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.json(user);
         }
     });
 });
