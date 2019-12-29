@@ -32,7 +32,7 @@ app.use('/user', userRouter);
 app.use('/config', configRouter);
 app.use('/device', deviceRouter);
 
-app.get('/', function (req, res) {
+app.post('/', function (req, res) {
     console.log(req);
     //res.json(req.headers.host + " , " + req.query);
 })
