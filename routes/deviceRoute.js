@@ -9,6 +9,7 @@ deviceRouter.route('/select').post(function (req, res) {
         if (device != null) {
             if (device.status == '') {
                 device.status = 'ON';
+                device.token = req.body.token;
                 device.save()
                     .then(device => {
                         console.log('Add device success');
