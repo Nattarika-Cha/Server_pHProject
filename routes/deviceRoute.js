@@ -31,6 +31,7 @@ deviceRouter.route('/select').post(function (req, res) {
 });
 
 deviceRouter.route('/device_list').get(function (req, res) {
+    console.log(req.params.token);
     deviceModel.find({}, function (err, device) {
         if(err){
             console.log(err);
