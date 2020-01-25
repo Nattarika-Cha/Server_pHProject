@@ -117,8 +117,7 @@ userRouter.route('/edituser').post(function (req, res) {
         user.gender = req.body.gender;
         user.save()
             .then(user => {
-                console.log('Edit user success');
-                res.json(user);
+                res.json('Edit user success');
             })
             .catch(err => {
                 res.status(400).send("unable edit user to database");
