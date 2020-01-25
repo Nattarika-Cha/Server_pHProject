@@ -116,7 +116,7 @@ userRouter.route('/edituser').post(function (req, res) {
         user.lname = req.body.lname;
         user.gender = req.body.gender;
         user.save()
-            .then(device => {
+            .then(user => {
                 console.log('Edit user success');
                 res.json(user);
             })
