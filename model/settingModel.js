@@ -3,15 +3,15 @@ const Schema = mongoose.Schema;
 
 const settingSchema = new Schema({
     sound: {
-        type: String,
+        type: Boolean,
         required: true
     },
     messege: {
-        type: String,
+        type: Boolean,
         required: true
     },
     gps: {
-        type: String,
+        type: Boolean,
         required: true
     },
     token: {
