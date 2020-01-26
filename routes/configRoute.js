@@ -12,6 +12,7 @@ configRouter.route('/add').post(function (req, res) {
         'soil_type': req.body.soil_type,
         'pH': req.body.pH,
         'humidity': req.body.humidity,
+        'serialDevice': req.body.serialDevice
     };
 
     const config = new configModel(insertConfig);

@@ -26,6 +26,10 @@ const configSchema = new Schema({
         type: String,
         required: true
     },
+    serialDevice: {
+        type: String,
+        required: true
+    },
 },{
     collection: 'config'
 });
