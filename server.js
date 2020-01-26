@@ -15,6 +15,7 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
 const userRouter = require('./routes/userRoute');
 const configRouter = require('./routes/configRoute');
 const deviceRouter = require('./routes/deviceRoute');
+const settingRouter = require('./routes/deviceRoute');
 
 //Model
 const senserModel = require('./model/senserModel');
@@ -31,6 +32,7 @@ app.use(
 app.use('/user', userRouter);
 app.use('/config', configRouter);
 app.use('/device', deviceRouter);
+app.use('/setting', settingRouter);
 
 app.post('/', function (req, res) {
     console.log(req.body.DevEUI_uplink);
