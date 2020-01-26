@@ -10,7 +10,15 @@ const configSchema = new Schema({
         type: String,
         required: true
     },
+    age_type: {
+        type: String,
+        required: true
+    },
     area: {
+        type: String,
+        required: true
+    },
+    area_type: {
         type: String,
         required: true
     },
