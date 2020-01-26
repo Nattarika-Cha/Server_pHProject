@@ -8,7 +8,9 @@ configRouter.route('/add').post(function (req, res) {
     var insertConfig = {
         'name': req.body.name,
         'age': req.body.age,
+        'age_type': req.body.age_type,
         'area': req.body.area,
+        'area_type': req.body.area_type,
         'soil_type': req.body.soil_type,
         'pH_low': req.body.pH_low,
         'pH_hight': req.body.pH_hight,
