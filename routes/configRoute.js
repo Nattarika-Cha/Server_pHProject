@@ -10,8 +10,10 @@ configRouter.route('/add').post(function (req, res) {
         'age': req.body.age,
         'area': req.body.area,
         'soil_type': req.body.soil_type,
-        'pH': req.body.pH,
-        'humidity': req.body.humidity,
+        'pH_low': req.body.pH_low,
+        'pH_hight': req.body.pH_hight,
+        'humidity_low': req.body.humidity_low,
+        'humidity_hight': req.body.humidity_hight,
         'serialDevice': req.body.serialDevice
     };
 

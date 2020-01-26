@@ -18,11 +18,19 @@ const configSchema = new Schema({
         type: String,
         required: true
     },
-    pH: {
+    pH_low: {
         type: String,
         required: true
     },
-    humidity: {
+    pH_hight: {
+        type: String,
+        required: true
+    },
+    humidity_low: {
+        type: String,
+        required: true
+    },
+    humidity_hight: {
         type: String,
         required: true
     },
