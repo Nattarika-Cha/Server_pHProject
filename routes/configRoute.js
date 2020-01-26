@@ -26,12 +26,12 @@ configRouter.route('/add').post(function (req, res) {
 });
 
 configRouter.route('/device_config').get(function (req, res) {
-    configModel.findOne({ serialDevice: req.query.serialDevice }, function (err, user) {
+    configModel.findOne({ serialDevice: req.query.serialDevice }, function (err, device_config) {
         if (err) {
             console.log(err);
         }
         else {
-            res.json(user);
+            res.json(device_config);
         }
     });
 });
