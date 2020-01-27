@@ -5,15 +5,8 @@ const senserRouter = express.Router();
 const senserModel = require('../model/senserModel');
 
 senserRouter.route('/add').post(function (req, res) {
-    console.log("test");
     var str = req.body.DevEUI_uplink.payload_parsed;
-    console.log(str);
     var data1 = str.split(" ");
-    console.log(data1[0]);
-    console.log(data1[1]);
-    console.log(data1[2]);
-    console.log(req.body.DevEUI_uplink.LrrLAT);
-    console.log(req.body.DevEUI_uplink.LrrLON);
     var insertDataSenser = {
         'pH': data1[1]/10,
         'moisture': data1[2],
@@ -25,7 +18,7 @@ senserRouter.route('/add').post(function (req, res) {
     const data = new senserModel(insertDataSenser);
     data.save()
         .then(data => {
-            res.json('Save success lora');
+            console.log('Save success lora');
         })
         .catch(err => {
             res.status(400).send("unable to save to database");
