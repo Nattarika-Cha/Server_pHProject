@@ -58,8 +58,8 @@ server.on("message", function (msg, rinfo) {
     var insertSenser = {
         'pH': pH[0]+pH[1]+pH[2],
         'moisture': data[1],
-        'latitude': 'test',
-        'longitude': 'test',
+        'latitude': '13.8196264',
+        'longitude': '100.5116211',
         'IMEI': data[2],
     };
 
