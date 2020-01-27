@@ -6,13 +6,13 @@ const senserModel = require('../model/senserModel');
 
 senserRouter.route('/add').post(function (req, res) {
     var str = req.body.DevEUI_uplink.payload_parsed;
-    var data = str.split(" ");
+    var data1 = str.split(" ");
     var insertDataSenser = {
-        'pH': data[1]/10,
-        'moisture': data[2],
+        'pH': data1[1]/10,
+        'moisture': data1[2],
         'latitude': req.body.DevEUI_uplink.LrrLAT,
         'longitude': req.body.DevEUI_uplink.LrrLON,
-        'IMEI': data[0]
+        'IMEI': data1[0]
     };
 
     const data = new senserModel(insertDataSenser);
