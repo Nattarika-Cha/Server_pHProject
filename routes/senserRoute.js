@@ -7,7 +7,13 @@ const senserModel = require('../model/senserModel');
 senserRouter.route('/add').post(function (req, res) {
     console.log("test");
     var str = req.body.DevEUI_uplink.payload_parsed;
+    console.log(str);
     var data1 = str.split(" ");
+    console.log(data1[0]);
+    console.log(data1[1]);
+    console.log(data1[2]);
+    console.log(req.body.DevEUI_uplink.LrrLAT);
+    console.log(req.body.DevEUI_uplink.LrrLON);
     var insertDataSenser = {
         'pH': data1[1]/10,
         'moisture': data1[2],
