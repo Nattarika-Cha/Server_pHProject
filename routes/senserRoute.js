@@ -26,14 +26,9 @@ senserRouter.route('/add').post(function (req, res) {
 });
 
 senserRouter.route('/data_senser').get(function (req, res) {
-    // senserModel.findOne({}, {}, { sort: { '_id' : -1 } },function (err, sen_sort) {
-    //         if (err) throw err;
-    //         console.log(sen_sort);
-    //     })
-
     senserModel.findOne().sort({'_id': -1}).exec(function (err, sen_sort) {
         if (err) throw err;
-        console.log(sen_sort);
+        res.json(sen_sort);
     })
 });
 
