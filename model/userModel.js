@@ -33,7 +33,7 @@ const userSchema = new Schema({
     },
     date: {
         type: Date,
-        default: moment.locale('en')
+        default: new Date("<YYYY-mm-ddTHH:MM:ss>")
     },
 },{
     collection: 'user'
