@@ -33,7 +33,7 @@ const userSchema = new Schema({
     },
     date: {
         type: Date,
-        default: (moment.tz(Date.now, "Asia/Bangkok"))
+        default: Date.now().format('YYYY-DD-MM')
     },
 },{
     collection: 'user'
