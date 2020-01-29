@@ -5,8 +5,7 @@ const settingRouter = express.Router();
 const settingModel = require('../model/settingModel');
 
 settingRouter.route('/add_setting').post(function (req, res) {
-    var token = req.body.token;
-    console.log(req.body);
+    var token = req.body.token; 
     settingModel.find({ 'token': token }).countDocuments(function (err, number) {
         if (number == 0) {
             var insertSetting = {
