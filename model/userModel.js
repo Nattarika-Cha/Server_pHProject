@@ -36,7 +36,7 @@ const userSchema = new Schema({
     },
     date: {
         type: Date,
-        default: {type:Date, default:Date.now}, tz: 'Asia/Bangkok' // e.g. 'Asia/Calcutta' or 'America/New_York'
+        default: Date.now
     },
 },{
     collection: 'user'
