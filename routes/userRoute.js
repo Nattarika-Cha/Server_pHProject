@@ -108,4 +108,21 @@ userRouter.route('/pro').get(function (req, res) {
     });
 });
 
+userRouter.route('/edituser').post(function (req, res) {
+    var username = req.body.username;
+
+    userModel.findOne({ username: username }, function (err, user) {
+        user.fname = req.body.fname;
+        user.lname = req.body.lname;
+        user.gender = req.body.gender;
+        user.save()
+            .then(user => {
+                res.json('Edit user success');
+            })
+            .catch(err => {
+                res.status(400).send("unable edit user to database");
+            });
+    })
+});
+
 module.exports = userRouter;

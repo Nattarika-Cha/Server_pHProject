@@ -15,6 +15,8 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
 const userRouter = require('./routes/userRoute');
 const configRouter = require('./routes/configRoute');
 const deviceRouter = require('./routes/deviceRoute');
+const settingRouter = require('./routes/settingRoute');
+const senserRouter = require('./routes/senserRoute');
 
 //Model
 const senserModel = require('./model/senserModel');
@@ -31,11 +33,12 @@ app.use(
 app.use('/user', userRouter);
 app.use('/config', configRouter);
 app.use('/device', deviceRouter);
+app.use('/setting', settingRouter);
+app.use('/senser', senserRouter);
 
-app.get('/', function (req, res) {
-    console.log(req.headers.host);
-    console.log(req.query);
-    res.json(req.headers.host + " , " + req.query);
+app.post('/', function (req, res) {
+    console.log(req.body.DevEUI_uplink);
+    //res.json(req.headers.host + " , " + req.query);
 })
 
 // UDP Server
@@ -55,8 +58,8 @@ server.on("message", function (msg, rinfo) {
     var insertSenser = {
         'pH': pH[0]+pH[1]+pH[2],
         'moisture': data[1],
-        'latitude': 'test',
-        'longitude': 'test',
+        'latitude': '13.8196264',
+        'longitude': '100.5116211',
         'IMEI': data[2],
     };
 

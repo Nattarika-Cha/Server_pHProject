@@ -10,7 +10,15 @@ const configSchema = new Schema({
         type: String,
         required: true
     },
+    age_type: {
+        type: String,
+        required: true
+    },
     area: {
+        type: String,
+        required: true
+    },
+    area_type: {
         type: String,
         required: true
     },
@@ -18,13 +26,29 @@ const configSchema = new Schema({
         type: String,
         required: true
     },
-    pH: {
+    pH_low: {
         type: String,
         required: true
     },
-    humidity: {
+    pH_hight: {
         type: String,
         required: true
+    },
+    humidity_low: {
+        type: String,
+        required: true
+    },
+    humidity_hight: {
+        type: String,
+        required: true
+    },
+    serialDevice: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
     },
 },{
     collection: 'config'

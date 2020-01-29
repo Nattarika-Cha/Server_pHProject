@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const deviceSchema = new Schema({
-    serialQR: {
-        type: String,
+const settingSchema = new Schema({
+    sound: {
+        type: Boolean,
         required: true
     },
-    serialDevice: {
-        type: String,
+    messege: {
+        type: Boolean,
         required: true
     },
-    status: {
-        type: String,
+    gps: {
+        type: Boolean,
         required: true
     },
     token: {
@@ -23,7 +23,7 @@ const deviceSchema = new Schema({
         default: Date.now
     },
 },{
-    collection: 'device'
+    collection: 'setting'
 });
 
-module.exports = mongoose.model('device', deviceSchema);
+module.exports = mongoose.model('setting', settingSchema);
