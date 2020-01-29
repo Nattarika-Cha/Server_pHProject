@@ -33,7 +33,7 @@ const userSchema = new Schema({
     },
     date: {
         type: Date,
-        default: moment().format('MMMM Do YYYY, h:mm:ss a')
+        default: moment().utc
     },
 },{
     collection: 'user'
