@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const analyzeRouter = express.Router();
 
-const alyzeModel = require('../model/alyzeModel');
+const alyzeModel = require('../model/analyzeModel');
 
 analyzeRouter.route('/analyze').get(function (req, res) {
     alyzeModel.findOne({ pH: req.query.pH, soil_type: req.query.soil_type }, function (err, pH) {
