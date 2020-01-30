@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const analyzeRouter = express.Router();
 
-const alyzeModel = require('../model/analyzeModel');
+const analyzeModel = require('../model/analyzeModel');
 
 analyzeRouter.route('/analyze').get(function (req, res) {
-    alyzeModel.findOne({ pH: req.query.pH, soil_type: req.query.soil_type }, function (err, pH) {
+    analyzeModel.findOne({ pH: req.query.pH, soil_type: req.query.soil_type }, function (err, pH) {
         if (err) {
             console.log(err);
         }
@@ -14,3 +14,5 @@ analyzeRouter.route('/analyze').get(function (req, res) {
         }
     });
 })
+
+module.exports = analyzeRouter;
