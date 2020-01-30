@@ -17,6 +17,7 @@ const configRouter = require('./routes/configRoute');
 const deviceRouter = require('./routes/deviceRoute');
 const settingRouter = require('./routes/settingRoute');
 const senserRouter = require('./routes/senserRoute');
+const analyzeRouter = require('./routes/analyzeRoute');
 
 //Model
 const senserModel = require('./model/senserModel');
@@ -35,6 +36,7 @@ app.use('/config', configRouter);
 app.use('/device', deviceRouter);
 app.use('/setting', settingRouter);
 app.use('/senser', senserRouter);
+app.use('/analyze', analyzeRouter);
 
 app.post('/', function (req, res) {
     console.log(req.body.DevEUI_uplink);
