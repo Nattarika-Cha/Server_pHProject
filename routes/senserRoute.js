@@ -36,8 +36,6 @@ senserRouter.route('/senser_history').get(function (req, res) {
     senserModel.find({
         IMEI: req.query.serialDevice,
         date: {
-            // $gte: "2020-01-27T19:00:00Z",
-            // $lt: "2020-01-27T20:00:00Z"
             $gte: req.query.start,
             $lt: req.query.end
         }
@@ -46,6 +44,7 @@ senserRouter.route('/senser_history').get(function (req, res) {
             console.log(err);
         }
         else {
+            console.log(senser_history);
             res.json(senser_history);
         }
     });
