@@ -57,20 +57,12 @@ server.on("message", function (msg, rinfo) {
     var data = str.split(",");
     var pH = data[0].split("");
     pH.splice(1,0,".");
-    // var insertSenser = {
-    //     'pH': pH[0]+pH[1]+pH[2],
-    //     'moisture': data[1],
-    //     'latitude': '13.8196264',
-    //     'longitude': '100.5116211',
-    //     'IMEI': data[2],
-    // };
-
     var insertSenser = {
-        'pH': '6.0',
-        'moisture': '60',
+        'pH': pH[0]+pH[1]+pH[2],
+        'moisture': data[1],
         'latitude': '13.8196264',
         'longitude': '100.5116211',
-        'IMEI': '34U2UT4H',
+        'IMEI': data[2],
     };
 
     const senser = new senserModel(insertSenser);
@@ -78,7 +70,7 @@ server.on("message", function (msg, rinfo) {
         .then(senser => {
             var ack = new Buffer("Save success");
             server.send(ack, 0, ack.length, rinfo.port, rinfo.address, function (err, bytes) {
-                console.log('Save success');
+                console.log('Save success NB');
             });
         })
         .catch(err => {

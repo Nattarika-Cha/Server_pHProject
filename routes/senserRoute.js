@@ -25,6 +25,26 @@ senserRouter.route('/add').post(function (req, res) {
         });
 });
 
+senserRouter.route('/add_test').post(function (req, res) {
+    var insertDataSenser = {
+        'pH': req.body.pH,
+        'moisture': req.body.moisture,
+        'latitude': req.body.latitude,
+        'longitude': req.body.longitude,
+        'IMEI': req.body.IMEI
+    };
+
+    const data = new senserModel(insertDataSenser);
+    data.save()
+        .then(data => {
+            console.log('Save success test');
+        })
+        .catch(err => {
+            res.status(400).send("unable to save to database");
+        });
+});
+
+
 senserRouter.route('/data_senser').get(function (req, res) {
     senserModel.findOne({IMEI: req.query.serialDevice}).sort({'_id': -1}).exec(function (err, sen_sort) {
         if (err) throw err;
