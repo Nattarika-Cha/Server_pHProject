@@ -44,7 +44,6 @@ senserRouter.route('/senser_history').get(function (req, res) {
             console.log(err);
         }
         else {
-            console.log(senser_history);
             res.json(senser_history);
         }
     });
