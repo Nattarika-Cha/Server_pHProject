@@ -57,12 +57,20 @@ server.on("message", function (msg, rinfo) {
     var data = str.split(",");
     var pH = data[0].split("");
     pH.splice(1,0,".");
+    // var insertSenser = {
+    //     'pH': pH[0]+pH[1]+pH[2],
+    //     'moisture': data[1],
+    //     'latitude': '13.8196264',
+    //     'longitude': '100.5116211',
+    //     'IMEI': data[2],
+    // };
+
     var insertSenser = {
-        'pH': pH[0]+pH[1]+pH[2],
-        'moisture': data[1],
+        'pH': '6.0',
+        'moisture': '60',
         'latitude': '13.8196264',
         'longitude': '100.5116211',
-        'IMEI': data[2],
+        'IMEI': '34U2UT4H',
     };
 
     const senser = new senserModel(insertSenser);
