@@ -38,6 +38,7 @@ senserRouter.route('/add_test').post(function (req, res) {
     data.save()
         .then(data => {
             console.log('Save success test');
+            res.json('Save success test');
         })
         .catch(err => {
             res.status(400).send("unable to save to database");
