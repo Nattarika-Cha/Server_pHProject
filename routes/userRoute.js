@@ -54,6 +54,7 @@ userRouter.route('/register').post(function (req, res) {
                 'fname': req.body.fname,
                 'lname': req.body.lname,
                 'gender': req.body.gender,
+                'image': req.body.image,
                 'token': token,
                 'salt': salt
             };
@@ -115,6 +116,7 @@ userRouter.route('/edituser').post(function (req, res) {
         user.fname = req.body.fname;
         user.lname = req.body.lname;
         user.gender = req.body.gender;
+        user.image = req.body.image;
         user.save()
             .then(user => {
                 res.json('Edit user success');
