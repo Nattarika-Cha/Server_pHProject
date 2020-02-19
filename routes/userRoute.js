@@ -51,12 +51,14 @@ userRouter.route('/register').post(function (req, res) {
             var insertRegister = {
                 'username': req.body.username,
                 'password': password,
+                'email': req.body.email,
                 'fname': req.body.fname,
                 'lname': req.body.lname,
                 'gender': req.body.gender,
                 'image': req.body.image,
                 'token': token,
-                'salt': salt
+                'salt': salt,
+                'active': '0'
             };
 
             const register = new userModel(insertRegister);

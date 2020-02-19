@@ -11,6 +11,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    email: {
+        type: String,
+        required: true
+    },
     fname: {
         type: String,
         required: true
@@ -32,6 +36,10 @@ const userSchema = new Schema({
         required: true
     },
     salt: {
+        type: String,
+        required: true
+    },
+    active: {
         type: String,
         required: true
     },
