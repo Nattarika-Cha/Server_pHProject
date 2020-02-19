@@ -141,16 +141,25 @@ userRouter.route('/change_pass').post(function (req, res) {
                 var salt = user.salt;
                 var hash_password = checkHashPassword(passwordOld, salt).passwordHash;
                 var encrypted_password = user.password;
-                console.log(hash_password);
-                console.log(encrypted_password);
-                // if (hash_password == encrypted_password) {
-                //     res.json(user);
-                //     console.log('Login success');
-                // }
-                // else {
-                //     res.json('Wrong password');
-                //     console.log('Wrong password');
-                // }
+                if (hash_password == encrypted_password) {
+                    var plaint_password = passwordNew;
+                    var hash_data = saltHashPassword(plaint_password);
+                    var password_new = hash_data.passwordHash;
+                    var salt_new = hash_data.salt;
+ 
+                    user.password = password_new;
+                    user.salt = salt_new;
+                    user.save()
+                        .then(user => {
+                            res.json('Edit password success');
+                        })
+                        .catch(err => {
+                            res.status(400).send("unable edit password to database");
+                        });
+                }
+                else {
+                    res.json('Wrong password');
+                }
             });
         }
     });
