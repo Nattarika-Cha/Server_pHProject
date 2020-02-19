@@ -61,6 +61,7 @@ userRouter.route('/register').post(function (req, res) {
                 'active': '0'
             };
 
+            console.log(insertRegister);
             const register = new userModel(insertRegister);
             register.save()
                 .then(register => {
