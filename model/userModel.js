@@ -29,7 +29,7 @@ const userSchema = new Schema({
     },
     image: {
         type: String,
-        required: true
+        required: false
     },
     token: {
         type: String,
