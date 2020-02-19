@@ -127,4 +127,33 @@ userRouter.route('/edituser').post(function (req, res) {
     })
 });
 
+userRouter.route('/change_pass').post(function (req, res) {
+    var username = req.body.username;
+    var passwordOld = req.body.passwordOld;
+    var passwordNew = req.body.passwordNew;
+
+    userModel.find({ 'username': username }).countDocuments(function (err, number) {
+        if (number == 0) {
+            res.json('Email not exists');
+        }
+        else {
+            userModel.findOne({ 'username': username }, function (err, user) {
+                var salt = user.salt;
+                var hash_password = checkHashPassword(passwordOld, salt).passwordHash;
+                var encrypted_password = user.passwordOld;
+                console.log(hash_password);
+                console.log(encrypted_password);
+                // if (hash_password == encrypted_password) {
+                //     res.json(user);
+                //     console.log('Login success');
+                // }
+                // else {
+                //     res.json('Wrong password');
+                //     console.log('Wrong password');
+                // }
+            });
+        }
+    });
+});
+
 module.exports = userRouter;
