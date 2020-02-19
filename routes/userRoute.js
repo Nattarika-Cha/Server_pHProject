@@ -140,7 +140,7 @@ userRouter.route('/change_pass').post(function (req, res) {
             userModel.findOne({ 'username': username }, function (err, user) {
                 var salt = user.salt;
                 var hash_password = checkHashPassword(passwordOld, salt).passwordHash;
-                var encrypted_password = user.passwordOld;
+                var encrypted_password = user.password;
                 console.log(hash_password);
                 console.log(encrypted_password);
                 // if (hash_password == encrypted_password) {
