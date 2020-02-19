@@ -36,40 +36,48 @@ function checkHashPassword(userPassword, salt) {
 userRouter.route('/register').post(function (req, res) {
     userModel.find({ 'username': req.body.username }).countDocuments(function (err, number) {
         if (number != 0) {
-            res.json('Email already emists');
-            console.log('Email already exists');
+            res.json('Username already emists');
+            console.log('Username already exists');
         }
         else {
-            var plaint_password = req.body.password;
-            var hash_data = saltHashPassword(plaint_password);
-            var password = hash_data.passwordHash;
-            var salt = hash_data.salt;
+            userModel.find({ 'email': req.body.email }).countDocuments(function (err, number_email) {
+                if (number_email != 0) {
+                    res.json('Email already emists');
+                    console.log('Email already exists');
+                }
+                else {
+                    var plaint_password = req.body.password;
+                    var hash_data = saltHashPassword(plaint_password);
+                    var password = hash_data.passwordHash;
+                    var salt = hash_data.salt;
 
-            //token
-            var token = crypto.createHash('sha512').update(req.body.username + rand).digest("hex")
+                    //token
+                    var token = crypto.createHash('sha512').update(req.body.username + rand).digest("hex")
 
-            var insertRegister = {
-                'username': req.body.username,
-                'password': password,
-                'email': req.body.email,
-                'fname': req.body.fname,
-                'lname': req.body.lname,
-                'gender': req.body.gender,
-                'image': req.body.image,
-                'token': token,
-                'salt': salt,
-                'active': '0'
-            };
+                    var insertRegister = {
+                        'username': req.body.username,
+                        'password': password,
+                        'email': req.body.email,
+                        'fname': req.body.fname,
+                        'lname': req.body.lname,
+                        'gender': req.body.gender,
+                        'image': req.body.image,
+                        'token': token,
+                        'salt': salt,
+                        'active': '0'
+                    };
 
-            console.log(insertRegister);
-            const register = new userModel(insertRegister);
-            register.save()
-                .then(register => {
-                    res.json('Registration success');
-                })
-                .catch(err => {
-                    res.status(400).send("unable to save to database");
-                });
+                    console.log(insertRegister);
+                    const register = new userModel(insertRegister);
+                    register.save()
+                        .then(register => {
+                            res.json('Registration success');
+                        })
+                        .catch(err => {
+                            res.status(400).send("unable to save to database");
+                        });
+                }
+            })
         }
     })
 });
@@ -149,7 +157,7 @@ userRouter.route('/change_pass').post(function (req, res) {
                     var hash_data = saltHashPassword(plaint_password);
                     var password_new = hash_data.passwordHash;
                     var salt_new = hash_data.salt;
- 
+
                     user.password = password_new;
                     user.salt = salt_new;
                     user.save()
