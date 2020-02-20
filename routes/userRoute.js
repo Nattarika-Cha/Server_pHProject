@@ -176,4 +176,8 @@ userRouter.route('/change_pass').post(function (req, res) {
     });
 });
 
+userRouter.route('/test_mail').post(function (req, res) {
+    res.json('Test mail');
+});
+
 module.exports = userRouter;
