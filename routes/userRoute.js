@@ -183,14 +183,16 @@ userRouter.route('/test_mail').post(function (req, res) {
 });
 
 async function main() {
-    // let testAccount = await nodemailer.createTestAccount();
+    let testAccount = await nodemailer.createTestAccount();
     console.log("testtt")
     const transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
         port: 587,
         auth: {
-            user: 'chyna47@ethereal.email',
-            pass: 'Sesz8GmQgjVwup9uA6'
+            // user: 'chyna47@ethereal.email',
+            // pass: 'Sesz8GmQgjVwup9uA6'
+            user: testAccount.user, // generated ethereal user
+            pass: testAccount.pass // generated ethereal password
         }
     });
 
