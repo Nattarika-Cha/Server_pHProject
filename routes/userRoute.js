@@ -186,12 +186,13 @@ async function main() {
     //let testAccount = await nodemailer.createTestAccount();
     console.log("testtt")
     const transporter = nodemailer.createTransport({
-        address: 'smtp.gmail.com',
-        port: 587,
-        domain: 'gmail.com',
-        username: 'Easyfarmsmart2020@gmail.com',
-        password: 'Easyfarmsmart1234',
-        authentication: 'plain'
+        host: 'smtp.gmail.com',
+        port: 465,
+        //secure: true, // use SSL
+        auth: {
+            user: 'Easyfarmsmart2020@gmail.com',
+            pass: 'Easyfarmsmart1234'
+        }
     });
 
     let info = await transporter.sendMail({
