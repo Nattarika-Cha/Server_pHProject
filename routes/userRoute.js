@@ -195,7 +195,7 @@ async function main() {
     });
 
     let info = await transporter.sendMail({
-        from: "Easyfarmsmart2020@gmail.com",
+        from: '"Easy Farm Smart Support" <Easyfarmsmart2020@gmail.com>',
         sender: "Easy Farm Smart Support", // sender address
         to: "they2539@gmail.com, they1996@hotmail.com, s5802041620203@email.kmutnb.ac.th, s5902041620113@email.kmutnb.ac.th", // list of receivers
         subject: "Change Password", // Subject line
