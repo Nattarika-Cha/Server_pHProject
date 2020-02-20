@@ -184,11 +184,10 @@ userRouter.route('/test_mail').post(function (req, res) {
 
 async function main() {
     //let testAccount = await nodemailer.createTestAccount();
-    console.log("testtt")
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
-        secure: false, // use SSL
+        secure: false, 
         auth: {
             user: 'Easyfarmsmart2020@gmail.com',
             pass: 'Easyfarmsmart1234'
@@ -197,7 +196,7 @@ async function main() {
 
     console.log(transporter)
     let info = await transporter.sendMail({
-        from: "Easyfarmsmart2020@gmail.com", // sender address
+        from: "Easy Farm Smart Support", // sender address
         to: "they2539@gmail.com, they1996@hotmail.com, s5802041620203@email.kmutnb.ac.th", // list of receivers
         subject: "Change Password", // Subject line
         text: "Hello world?....", // plain text body
