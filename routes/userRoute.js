@@ -187,7 +187,7 @@ userRouter.route('/test_mail').post(function (req, res) {
         }
     });
 
-    let info = await transporter.sendMail({
+    let info = transporter.sendMail({
         from: '"Fred Foo 👻" <Easyfarmsmart2020@gmail.com>', // sender address
         to: "they1996@hotmail.com, s5802041620203@email.kmutnb.ac.th", // list of receivers
         subject: "Change Password", // Subject line
