@@ -178,6 +178,13 @@ userRouter.route('/change_pass').post(function (req, res) {
 });
 
 userRouter.route('/test_mail').post(function (req, res) {
+    main().catch(console.error);
+    res.json('Test mail');
+});
+
+async function main() {
+    // let testAccount = await nodemailer.createTestAccount();
+
     const transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
         port: 587,
@@ -187,17 +194,16 @@ userRouter.route('/test_mail').post(function (req, res) {
         }
     });
 
-    let info = transporter.sendMail({
+    let info = await transporter.sendMail({
         from: '"Fred Foo 👻" <Easyfarmsmart2020@gmail.com>', // sender address
         to: "they1996@hotmail.com, s5802041620203@email.kmutnb.ac.th", // list of receivers
         subject: "Change Password", // Subject line
         text: "Hello world?....", // plain text body
         html: "<b>Hello world?....</b>" // html body
-      });
-    
-      console.log("Message sent: %s", info.messageId);
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-      res.json('Test mail');
-});
+    });
+
+    console.log("Message sent: %s", info.messageId);
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+}
 
 module.exports = userRouter;
