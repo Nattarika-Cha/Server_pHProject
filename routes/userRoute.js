@@ -177,9 +177,9 @@ userRouter.route('/change_pass').post(function (req, res) {
     });
 });
 
-userRouter.route('/test_mail').post(function (req, res) {
+userRouter.route('/send_mail').post(function (req, res) {
     main().catch(console.error);
-    res.json('Test mail');
+    res.json('Send mail success');
 });
 
 async function main() {
@@ -194,7 +194,6 @@ async function main() {
         }
     });
 
-    console.log(transporter)
     let info = await transporter.sendMail({
         from: "Easy Farm Smart Support", // sender address
         to: "they2539@gmail.com, they1996@hotmail.com, s5802041620203@email.kmutnb.ac.th", // list of receivers
