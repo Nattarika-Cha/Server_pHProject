@@ -54,7 +54,7 @@ changePassRouter.route('/forget_pass').post(function (req, res) {
             const changePass = new changePassModel(insertChange);
             changePass.save()
                 .then(changePass => {
-                    sendEmail(email,genid).catch(console.error);
+                    sendEmail(email).catch(console.error);
                     res.json('Change password success');
                 })
                 .catch(err => {
@@ -64,7 +64,7 @@ changePassRouter.route('/forget_pass').post(function (req, res) {
     })
 });
 
-async function sendEmail(email,genid) {
+async function sendEmail(email) {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
@@ -75,6 +75,7 @@ async function sendEmail(email,genid) {
         }
     });
 
+    console.log("testtt");
     transporter.sendMail({
         from: '"Easy Farm Smart Support" <Easyfarmsmart2020@gmail.com>',
         to: email, // list of receivers
