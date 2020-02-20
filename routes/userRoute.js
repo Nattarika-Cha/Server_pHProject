@@ -3,6 +3,7 @@ const app = express();
 const userRouter = express.Router();
 var crypto = require('crypto');
 var rand = require('csprng');
+const nodemailer = require("nodemailer");
 
 const userModel = require('../model/userModel');
 
@@ -177,7 +178,26 @@ userRouter.route('/change_pass').post(function (req, res) {
 });
 
 userRouter.route('/test_mail').post(function (req, res) {
-    res.json('Test mail');
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        auth: {
+            user: 'chyna47@ethereal.email',
+            pass: 'Sesz8GmQgjVwup9uA6'
+        }
+    });
+
+    let info = await transporter.sendMail({
+        from: '"Fred Foo 👻" <Easyfarmsmart2020@gmail.com>', // sender address
+        to: "they1996@hotmail.com, s5802041620203@email.kmutnb.ac.th", // list of receivers
+        subject: "Change Password", // Subject line
+        text: "Hello world?....", // plain text body
+        html: "<b>Hello world?....</b>" // html body
+      });
+    
+      console.log("Message sent: %s", info.messageId);
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+      res.json('Test mail');
 });
 
 module.exports = userRouter;
