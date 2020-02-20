@@ -39,8 +39,8 @@ changePassRouter.route('/forget_pass').post(function (req, res) {
     var email = req.body.email;
     userModel.find({ 'email': email }).countDocuments(function (err, number) {
         if (number == 0) {
-            res.json('Email already emists');
-            console.log('Email already exists');
+            res.json('Email not already');
+            console.log('Email not already');
         }
         else {
             var genid = makeid(8);
