@@ -187,8 +187,8 @@ async function main() {
     console.log("testtt")
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
-        port: 465,
-        //secure: true, // use SSL
+        port: 587,
+        secure: false, // use SSL
         auth: {
             user: 'Easyfarmsmart2020@gmail.com',
             pass: 'Easyfarmsmart1234'
