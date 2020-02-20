@@ -195,6 +195,7 @@ async function main() {
         }
     });
 
+    console.log(transporter)
     let info = await transporter.sendMail({
         from: "Easyfarmsmart2020@gmail.com", // sender address
         to: "they2539@gmail.com", // list of receivers
