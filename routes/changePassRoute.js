@@ -50,6 +50,7 @@ changePassRouter.route('/forget_pass').post(function (req, res) {
                 'active': '0'
             };
 
+            console.log(insertChange);
             const changePass = new changePassModel(insertChange);
             changePass.save()
                 .then(changePass => {
