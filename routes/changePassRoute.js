@@ -54,6 +54,7 @@ changePassRouter.route('/forget_pass').post(function (req, res) {
             const changePass = new changePassModel(insertChange);
             changePass.save()
                 .then(changePass => {
+                    console.log("testtt");
                     sendEmail(email).catch(console.error);
                     res.json('Change password success');
                 })
