@@ -188,7 +188,7 @@ async function main() {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
-        secure: 'tls',
+        //secure: 'tls',
         auth: {
             user: 'Easyfarmsmart2020@gmail.com',
             pass: 'Easyfarmsmart1234'
