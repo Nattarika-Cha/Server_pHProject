@@ -189,10 +189,10 @@ async function main() {
         host: 'smtp.ethereal.email',
         port: 587,
         auth: {
-            // user: 'chyna47@ethereal.email',
-            // pass: 'Sesz8GmQgjVwup9uA6'
-            user: testAccount.user, // generated ethereal user
-            pass: testAccount.pass // generated ethereal password
+            user: 'chyna47@ethereal.email',
+            pass: 'Sesz8GmQgjVwup9uA6'
+            // user: testAccount.user, // generated ethereal user
+            // pass: testAccount.pass // generated ethereal password
         }
     });
 
