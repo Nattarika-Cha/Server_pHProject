@@ -79,8 +79,8 @@ async function sendEmail(email,genid) {
         from: '"Easy Farm Smart Support" <Easyfarmsmart2020@gmail.com>',
         to: email, // list of receivers
         subject: "เปลี่ยนรหัสผ่าน", // Subject line
-        text: "รหัสยืนยันตัวตน คือ " + genid, // plain text body
-        html: "<b>รหัสยืนยันตัวตน คือ " + genid + "</b>" // html body
+        text: "รหัสยืนยันตัวตน คือ " , // plain text body
+        html: "<b>รหัสยืนยันตัวตน คือ </b>" // html body
     }, function (err, info) {
         if (err) {
             console.log(err)
