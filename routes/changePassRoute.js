@@ -50,12 +50,10 @@ changePassRouter.route('/forget_pass').post(function (req, res) {
                 'active': '0'
             };
 
-            console.log(insertChange);
             const changePass = new changePassModel(insertChange);
             changePass.save()
                 .then(changePass => {
-                    console.log("testtt");
-                    sendEmail(email).catch(console.error);
+                    sendEmail(email,genid).catch(console.error);
                     res.json('Change password success');
                 })
                 .catch(err => {
@@ -65,7 +63,7 @@ changePassRouter.route('/forget_pass').post(function (req, res) {
     })
 });
 
-async function sendEmail(email) {
+async function sendEmail(email,genid) {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
@@ -76,13 +74,12 @@ async function sendEmail(email) {
         }
     });
 
-    console.log("testtt");
     transporter.sendMail({
         from: '"Easy Farm Smart Support" <Easyfarmsmart2020@gmail.com>',
         to: email, // list of receivers
         subject: "เปลี่ยนรหัสผ่าน", // Subject line
-        text: "รหัสยืนยันตัวตน คือ " , // plain text body
-        html: "<b>รหัสยืนยันตัวตน คือ </b>" // html body
+        text: "รหัสยืนยันตัวตน คือ " + genid , // plain text body
+        html: "<b>รหัสยืนยันตัวตน คือ " + genid + "</b>" // html body
     }, function (err, info) {
         if (err) {
             console.log(err)
