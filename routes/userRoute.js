@@ -183,12 +183,12 @@ userRouter.route('/test_mail').post(function (req, res) {
 });
 
 async function main() {
-    let testAccount = await nodemailer.createTestAccount();
+    //let testAccount = await nodemailer.createTestAccount();
     console.log("testtt")
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
-        secure: false,
+        secure: 'tls',
         auth: {
             user: 'Easyfarmsmart2020@gmail.com',
             pass: 'Easyfarmsmart1234'
