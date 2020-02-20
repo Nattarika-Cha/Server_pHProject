@@ -19,7 +19,7 @@ const changePassSchema = new Schema({
         default: Date.now
     },
 },{
-    collection: 'change_pass'
+    collection: 'changePass'
 });
 
-module.exports = mongoose.model('change_pass', changePassSchema);
+module.exports = mongoose.model('changePass', changePassSchema);

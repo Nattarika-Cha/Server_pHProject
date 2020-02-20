@@ -86,7 +86,6 @@ async function sendEmail(email,genid) {
             console.log(err)
         } else {
             console.log(info);
-            res.json('Send mail success');
         }
     });
 
