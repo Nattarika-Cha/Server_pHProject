@@ -68,7 +68,6 @@ userRouter.route('/register').post(function (req, res) {
                         'active': '0'
                     };
 
-                    console.log(insertRegister);
                     const register = new userModel(insertRegister);
                     register.save()
                         .then(register => {
@@ -197,9 +196,9 @@ async function sendEmail(email) {
     transporter.sendMail({
         from: '"Easy Farm Smart Support" <Easyfarmsmart2020@gmail.com>',
         to: email, // list of receivers
-        subject: "Change Password", // Subject line
-        text: "Hello world?....", // plain text body
-        html: "<b>Hello world?....</b>" // html body
+        subject: "เปลี่ยนรหัสผ่าน", // Subject line
+        text: "กรุณาเข้าสู่ลิ้งเพื่อเปลี่ยนรหัสผ่าน", // plain text body
+        html: "<b>กรุณาเข้าสู่ลิ้งเพื่อเปลี่ยนรหัสผ่าน</b>" // html body
     }, function (err, info) {
         if (err) {
             console.log(err)
