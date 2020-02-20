@@ -63,12 +63,6 @@ changePassRouter.route('/forget_pass').post(function (req, res) {
     })
 });
 
-userRouter.route('/send_mail').post(function (req, res) {
-    var email = "they2539@gmail.com";
-    sendEmail(email).catch(console.error);
-    res.json('Send mail success');
-});
-
 async function sendEmail(email,genid) {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
