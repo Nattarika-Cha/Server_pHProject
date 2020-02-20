@@ -186,19 +186,20 @@ async function main() {
     let testAccount = await nodemailer.createTestAccount();
     console.log("testtt")
     const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
+        host: 'smtp.gmail.com',
         port: 587,
+        secure: false,
         auth: {
-            user: 'chyna47@ethereal.email',
-            pass: 'Sesz8GmQgjVwup9uA6'
+            user: 'Easyfarmsmart2020@gmail.com',
+            pass: 'Easyfarmsmart1234'
             // user: testAccount.user, // generated ethereal user
             // pass: testAccount.pass // generated ethereal password
         }
     });
 
     let info = await transporter.sendMail({
-        from: "Easyfarmsmart2020@gmail.com>", // sender address
-        to: "they1996@hotmail.com", // list of receivers
+        from: "Easyfarmsmart2020@gmail.com", // sender address
+        to: "s5802041620203@email.kmutnb.ac.th", // list of receivers
         subject: "Change Password", // Subject line
         text: "Hello world?....", // plain text body
         html: "<b>Hello world?....</b>" // html body
