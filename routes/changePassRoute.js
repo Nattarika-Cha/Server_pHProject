@@ -109,4 +109,4 @@ function makeid(length) {
     return result;
 }
 
-module.exports = userRouter;
+module.exports = changePassRouter;
