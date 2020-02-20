@@ -178,33 +178,39 @@ userRouter.route('/change_pass').post(function (req, res) {
 });
 
 userRouter.route('/send_mail').post(function (req, res) {
-    main().catch(console.error);
+    var email = "they2539@gmail.com";
+    sendEmail(email).catch(console.error);
     res.json('Send mail success');
 });
 
-async function main() {
-    //let testAccount = await nodemailer.createTestAccount();
+async function sendEmail(email) {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
-        secure: false, 
+        secure: false,
         auth: {
             user: 'Easyfarmsmart2020@gmail.com',
             pass: 'Easyfarmsmart1234'
         }
     });
 
-    let info = await transporter.sendMail({
+    transporter.sendMail({
         from: '"Easy Farm Smart Support" <Easyfarmsmart2020@gmail.com>',
-        //sender: "Easy Farm Smart Support", // sender address
-        to: "they2539@gmail.com, they1996@hotmail.com, s5802041620203@email.kmutnb.ac.th, s5902041620113@email.kmutnb.ac.th", // list of receivers
+        to: email, // list of receivers
         subject: "Change Password", // Subject line
         text: "Hello world?....", // plain text body
         html: "<b>Hello world?....</b>" // html body
+    }, function (err, info) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(info);
+            res.json('Send mail success');
+        }
     });
 
-    console.log("Message sent: %s", info.messageId);
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // console.log("Message sent: %s", info.messageId);
+    // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
 module.exports = userRouter;
