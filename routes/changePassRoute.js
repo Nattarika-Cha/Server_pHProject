@@ -66,7 +66,7 @@ changePassRouter.route('/forget_pass').post(function (req, res) {
 changePassRouter.route('/chack_confrim').post(function (req, res) {
     var email = req.body.email;
     var genid = req.body.genid;
-    senserModel.findOne({email: email, active: '0'}).sort({'_id': -1}).exec(function (err, confrim) {
+    changePassModel.findOne({email: email, active: '0'}).sort({'_id': -1}).exec(function (err, confrim) {
         if (err) throw err;
         console.log(genid);
         console.log(confrim);
