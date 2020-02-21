@@ -67,10 +67,23 @@ changePassRouter.route('/chack_confrim').post(function (req, res) {
     var email = req.body.email;
     var genid = req.body.genid;
     changePassModel.findOne({email: email, active: '0'}).sort({'_id': -1}).exec(function (err, confrim) {
-        if (err) throw err;
-        console.log(genid);
-        console.log(confrim);
-        //res.json(sen_sort);
+        if (confrim != null) {
+            if (confrim.genid == genid) {
+                confrim.active = '1';
+                confrim.save()
+                    .then(confrim => {
+                        res.json('Confrim success');
+                    })
+                    .catch(err => {
+                        res.status(400).send("unable Confrim to database");
+                    });
+            } else {
+                res.json('Genid Not Correct');
+            }
+        }
+        else {
+            res.json('Not confrim');
+        }
     })
 });
 
