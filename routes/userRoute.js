@@ -176,6 +176,35 @@ userRouter.route('/change_pass').post(function (req, res) {
     });
 });
 
+userRouter.route('/forget_pass').post(function (req, res) {
+    var email = req.body.email;
+    var passwordNew = req.body.passwordNew;
+
+    userModel.find({ 'email': email }).countDocuments(function (err, number) {
+        if (number == 0) {
+            res.json('Email not exists');
+        }
+        else {
+            userModel.findOne({ 'email': email }, function (err, user) {
+                var plaint_password = passwordNew;
+                var hash_data = saltHashPassword(plaint_password);
+                var password_new = hash_data.passwordHash;
+                var salt_new = hash_data.salt;
+
+                user.password = password_new;
+                user.salt = salt_new;
+                user.save()
+                    .then(user => {
+                        res.json('Edit password success');
+                    })
+                    .catch(err => {
+                        res.status(400).send("unable edit password to database");
+                    });
+            });
+        }
+    });
+});
+
 userRouter.route('/send_mail').post(function (req, res) {
     var email = "they2539@gmail.com";
     sendEmail(email).catch(console.error);
