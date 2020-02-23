@@ -18,6 +18,10 @@ const senserSchema = new Schema({
         type: String,
         required: true
     },
+    pump: {
+        type: String,
+        required: true
+    },
     IMEI: {
         type: String,
         required: true

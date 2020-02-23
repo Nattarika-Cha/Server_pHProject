@@ -6,7 +6,7 @@ const senserModel = require('../model/senserModel');
 
 senserRouter.route('/add').post(function (req, res) {
     if (req.body.DevEUI_uplink != undefined) {
-        console.log(req.body.DevEUI_uplink.payload_hex);
+        //console.log(req.body.DevEUI_uplink.payload_hex);
         var str1 = req.body.DevEUI_uplink.payload_hex;
         var hex = str1.toString();
         var str = '';
@@ -15,23 +15,24 @@ senserRouter.route('/add').post(function (req, res) {
         }
         console.log(str);
         // var str = req.body.DevEUI_uplink.payload_parsed;
-        // var data1 = str.split(" ");
-        // var insertDataSenser = {
-        //     'pH': data1[1]/10,
-        //     'moisture': data1[2],
-        //     'latitude': req.body.DevEUI_uplink.LrrLAT,
-        //     'longitude': req.body.DevEUI_uplink.LrrLON,
-        //     'IMEI': data1[0]
-        // };
+        var data1 = str.split(" ");
+        var insertDataSenser = {
+            'pH': data1[1]/10,
+            'moisture': data1[2],
+            'latitude': req.body.DevEUI_uplink.LrrLAT,
+            'longitude': req.body.DevEUI_uplink.LrrLON,
+            'pump': data1[3],
+            'IMEI': data1[0]
+        };
 
-        // const data = new senserModel(insertDataSenser);
-        // data.save()
-        //     .then(data => {
-        //         console.log('Save success lora');
-        //     })
-        //     .catch(err => {
-        //         res.status(400).send("unable to save to database");
-        //     });
+        const data = new senserModel(insertDataSenser);
+        data.save()
+            .then(data => {
+                console.log('Save success lora');
+            })
+            .catch(err => {
+                res.status(400).send("unable to save to database");
+            });
     } else {
         console.log("Send to lora");
     }
