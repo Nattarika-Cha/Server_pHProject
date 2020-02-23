@@ -5,7 +5,7 @@ const senserRouter = express.Router();
 const senserModel = require('../model/senserModel');
 
 senserRouter.route('/add').post(function (req, res) {
-    console.log(req.body.DevEUI_uplink);
+    console.log(req.body);
     var str1 = req.body.DevEUI_uplink.payload_hex;
     var hex  = str1.toString();
 	var str = '';
