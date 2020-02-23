@@ -5,7 +5,14 @@ const senserRouter = express.Router();
 const senserModel = require('../model/senserModel');
 
 senserRouter.route('/add').post(function (req, res) {
-    console.log(req.body.DevEUI_uplink);
+    console.log(req.body.DevEUI_uplink.payload_hex);
+    var str1 = req.body.DevEUI_uplink.payload_hex;
+    var hex  = str1.toString();
+	var str = '';
+	for (var n = 0; n < hex.length; n += 2) {
+		str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
+    }
+    console.log(str);
     // var str = req.body.DevEUI_uplink.payload_parsed;
     // var data1 = str.split(" ");
     // var insertDataSenser = {
