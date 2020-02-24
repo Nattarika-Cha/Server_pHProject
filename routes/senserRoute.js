@@ -44,6 +44,7 @@ senserRouter.route('/add_test').post(function (req, res) {
         'moisture': req.body.moisture,
         'latitude': req.body.latitude,
         'longitude': req.body.longitude,
+        'pump': req.body.pump,
         'IMEI': req.body.IMEI
     };
 
