@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
 const senserRouter = express.Router();
+var request = require('request');
 
 const senserModel = require('../model/senserModel');
+const deviceModel = require('../model/deviceModel');
 
 senserRouter.route('/add').post(function (req, res) {
     if (req.body.DevEUI_uplink != undefined) {
@@ -17,7 +19,7 @@ senserRouter.route('/add').post(function (req, res) {
         // var str = req.body.DevEUI_uplink.payload_parsed;
         var data1 = str.split(" ");
         var insertDataSenser = {
-            'pH': data1[1]/10,
+            'pH': data1[1] / 10,
             'moisture': data1[2],
             'latitude': req.body.DevEUI_uplink.LrrLAT,
             'longitude': req.body.DevEUI_uplink.LrrLON,
@@ -81,6 +83,45 @@ senserRouter.route('/senser_history').get(function (req, res) {
         else {
             res.json(senser_history);
         }
+    });
+});
+
+senserRouter.route('/pump').post(function (req, res) {
+    var devive_EUI = req.body.devive_EUI;
+    var port = req.body.port;
+    var status = req.body.status;
+    var options = {
+        'method': 'POST',
+        'url': 'https://loraiot.cattelecom.com/portal/iotapi/auth/token',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({ "username": "pHproject", "password": "pHproject1234" })
+
+    };
+    request(options, function (error, token) {
+        if (error) throw new Error(error);
+        var access_token = JSON.parse(token.body);
+        var authorization = "Bearer " + access_token.access_token;
+        var url = "https://loraiot.cattelecom.com/portal/iotapi/core/devices/" + devive_EUI + "/downlinkMessages";
+        var options = {
+            'method': 'POST',
+            'url': url,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': authorization
+            },
+            body: JSON.stringify({ "payloadHex": status, "targetPorts": port })
+
+        };
+        request(options, function (error, response) {
+            if (error) throw new Error(error);
+            var pump = JSON.parse(response.body);
+            console.log(response.body);
+            res.json("Pump " + pump.payloadHex + " " + pump.status);
+        });
     });
 });
 

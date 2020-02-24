@@ -10,6 +10,14 @@ const deviceSchema = new Schema({
         type: String,
         required: true
     },
+    devive_EUI:{
+        type: String,
+        required: true
+    },
+    port:{
+        type: String,
+        required: true
+    },
     status: {
         type: String,
         required: true
