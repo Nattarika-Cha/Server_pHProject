@@ -120,7 +120,7 @@ senserRouter.route('/pump').post(function (req, res) {
             if (error) throw new Error(error);
             var pump = JSON.parse(response.body);
             console.log(response.body);
-            res.json("Pump " + pump.payloadHex + " " + pump.status);
+            res.json(pump);
         });
     });
 });
