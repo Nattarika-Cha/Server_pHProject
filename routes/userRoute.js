@@ -85,6 +85,7 @@ userRouter.route('/register').post(function (req, res) {
 userRouter.route('/login').post(function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
+    var device_token = req.body.device_token;
 
     userModel.find({ 'username': username }).countDocuments(function (err, number) {
         if (number == 0) {
@@ -97,8 +98,15 @@ userRouter.route('/login').post(function (req, res) {
                 var hash_password = checkHashPassword(password, salt).passwordHash;
                 var encrypted_password = user.password;
                 if (hash_password == encrypted_password) {
-                    res.json(user);
-                    console.log('Login success');
+                    user.device_token = device_token;
+                    user.save()
+                        .then(user => {
+                            res.json(user);
+                            console.log('Login success');
+                        })
+                        .catch(err => {
+                            res.status(400).send("unable device token to database");
+                        });
                 }
                 else {
                     res.json('Wrong password');

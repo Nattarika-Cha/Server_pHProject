@@ -35,6 +35,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    device_token: {
+        type: String,
+        //required: true
+    },
     salt: {
         type: String,
         required: true
