@@ -73,8 +73,8 @@ userRouter.route('/register').post(function (req, res) {
                     register.save()
                         .then(register => {
                             var insertSetting = {
-                                'messege': false,
-                                'gps': false,
+                                'messege': true,
+                                'gps': true,
                                 'token': token
                             };
 
