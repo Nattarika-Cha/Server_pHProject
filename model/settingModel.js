@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const settingSchema = new Schema({
-    sound: {
-        type: Boolean,
-        required: true
-    },
+    // sound: {
+    //     type: Boolean,
+    //     required: true
+    // },
     messege: {
         type: Boolean,
         required: true

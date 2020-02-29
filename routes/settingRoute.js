@@ -5,11 +5,13 @@ const settingRouter = express.Router();
 const settingModel = require('../model/settingModel');
 
 settingRouter.route('/add_setting').post(function (req, res) {
-    var token = req.body.token; 
+    var token = req.body.token;
     settingModel.find({ 'token': token }).countDocuments(function (err, number) {
         if (number == 0) {
+            console.log("Message : " + req.body.messege);
+            console.log("GPS : " + req.body.gps);
             var insertSetting = {
-                'sound': req.body.sound,
+                // 'sound': req.body.sound,
                 'messege': req.body.messege,
                 'gps': req.body.gps,
                 'token': req.body.token
@@ -26,7 +28,9 @@ settingRouter.route('/add_setting').post(function (req, res) {
         }
         else {
             settingModel.findOne({ 'token': token }, function (err, setting) {
-                setting.sound = req.body.sound;
+                // setting.sound = req.body.sound;
+                console.log("Message : " + req.body.messege);
+                console.log("GPS : " + req.body.gps);
                 setting.messege = req.body.messege;
                 setting.gps = req.body.gps;
                 setting.save()
