@@ -133,6 +133,21 @@ userRouter.route('/login').post(function (req, res) {
     });
 });
 
+userRouter.route('/logout').post(function (req, res) {
+    var token = req.body.token;
+
+    userModel.findOne({ token: token }, function (err, user) {
+        user.device_token = '';
+        user.save()
+            .then(user => {
+                res.json('Logout success');
+            })
+            .catch(err => {
+                res.status(400).send("unable edit user to database");
+            });
+    })
+});
+
 userRouter.route('/pro').get(function (req, res) {
     userModel.findOne({ username: req.query.username }, function (err, user) {
         if (err) {
