@@ -6,6 +6,7 @@ var rand = require('csprng');
 const nodemailer = require("nodemailer");
 
 const userModel = require('../model/userModel');
+const settingModel = require('../model/settingModel');
 
 var genRandomString = function (length) {
     return crypto.randomBytes(Math.ceil(length / 2))
@@ -71,6 +72,20 @@ userRouter.route('/register').post(function (req, res) {
                     const register = new userModel(insertRegister);
                     register.save()
                         .then(register => {
+                            var insertSetting = {
+                                'messege': false,
+                                'gps': false,
+                                'token': token
+                            };
+
+                            const setting = new settingModel(insertSetting);
+                            setting.save()
+                                .then(setting => {
+                                    console.log("save setting")
+                                })
+                                .catch(err => {
+                                    console.log("unable to save to database");
+                                });
                             res.json('Registration success');
                         })
                         .catch(err => {
