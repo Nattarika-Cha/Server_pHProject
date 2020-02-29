@@ -25,8 +25,7 @@ settingRouter.route('/add_setting').post(function (req, res) {
                 .catch(err => {
                     res.status(400).send("unable to save to database");
                 });
-        }
-        else {
+        } else {
             settingModel.findOne({ 'token': token }, function (err, setting) {
                 // setting.sound = req.body.sound;
                 console.log("Message : " + req.body.messege);
