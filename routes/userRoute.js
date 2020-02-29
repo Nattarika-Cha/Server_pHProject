@@ -87,6 +87,7 @@ userRouter.route('/login').post(function (req, res) {
     var password = req.body.password;
     var device_token = req.body.device_token;
 
+    console.log(device_token);
     userModel.find({ 'username': username }).countDocuments(function (err, number) {
         if (number == 0) {
             res.json('Email not exists');
