@@ -678,10 +678,6 @@ senserRouter.route('/pump').post(function (req, res) {
     var devive_EUI = req.body.devive_EUI;
     var port = req.body.port;
     var status = req.body.status;
-
-    console.log(devive_EUI);
-    console.log(port);
-    console.log(status);
     var options = {
         'method': 'POST',
         'url': 'https://loraiot.cattelecom.com/portal/iotapi/auth/token',
@@ -695,7 +691,6 @@ senserRouter.route('/pump').post(function (req, res) {
 
     request(options, function (error, token) {
         if (error) throw new Error(error);
-        console.log(token.body);
         var access_token = JSON.parse(token.body);
         var authorization = "Bearer " + access_token.access_token;
         var url = "https://loraiot.cattelecom.com/portal/iotapi/core/devices/" + devive_EUI + "/downlinkMessages";
