@@ -80,8 +80,8 @@ senserRouter.route('/add').post(function (req, res) {
                     var date_now = moment();
                     var date_next_noti = moment(date_last_noti).add(1, 'hours');
                     // console.log("Last " + date_last_noti);
-                    console.log("Now " + date_now);
-                    console.log("Next " + date_next_noti);
+                    // console.log("Now " + date_now);
+                    // console.log("Next " + date_next_noti);
                     if (date_next_noti < date_now) {
                         configModel.find({ serialDevice: serialDevice }).countDocuments(function (err, number) {
                             if (number != 0) {
@@ -336,7 +336,7 @@ senserRouter.route('/add').post(function (req, res) {
                     })
                 }
             } else {
-                console.log("Normal Pump")
+                //console.log("Normal Pump")
             }
         })
     } else {
@@ -359,8 +359,8 @@ senserRouter.route('/add_test').post(function (req, res) {
                 var date_now = moment();
                 var date_next_noti = moment(date_last_noti).add(1, 'hours');
                 // console.log("Last " + date_last_noti);
-                console.log("Now " + date_now);
-                console.log("Next " + date_next_noti);
+                // console.log("Now " + date_now);
+                // console.log("Next " + date_next_noti);
                 if (date_next_noti < date_now) {
                     configModel.find({ serialDevice: serialDevice }).countDocuments(function (err, number) {
                         if (number != 0) {
@@ -615,7 +615,7 @@ senserRouter.route('/add_test').post(function (req, res) {
                 })
             }
         } else {
-            console.log("Normal Pump")
+            // console.log("Normal Pump")
         }
     })
 });
