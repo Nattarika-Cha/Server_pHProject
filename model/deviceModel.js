@@ -26,6 +26,10 @@ const deviceSchema = new Schema({
         type: String,
         required: true
     },
+    plant: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now

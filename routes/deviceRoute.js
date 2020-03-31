@@ -9,6 +9,7 @@ deviceRouter.route('/select').post(function (req, res) {
         if (device != null) {
             if (device.status == '') {
                 device.status = 'ON';
+                device.plant = req.body.plant;
                 device.token = req.body.token;
                 device.save()
                     .then(device => {
@@ -32,7 +33,7 @@ deviceRouter.route('/select').post(function (req, res) {
 
 deviceRouter.route('/device_list').get(function (req, res) {
     console.log(req.query.token);
-    deviceModel.find({'token' : req.query.token}, function (err, device) {
+    deviceModel.find({'token' : req.query.token, 'plant' : req.query.plant}, function (err, device) {
         if(err){
             console.log(err);
         }
