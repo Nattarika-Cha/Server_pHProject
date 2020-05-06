@@ -30,6 +30,10 @@ const deviceSchema = new Schema({
         type: String,
         required: true
     },
+    senser_type: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now
