@@ -10,6 +10,10 @@ const senserSchema = new Schema({
         type: String,
         required: true
     },
+    WaterpH: {
+        type: String,
+        required: true
+    },
     latitude: {
         type: String,
         required: true
