@@ -290,7 +290,7 @@ senserRouter.route('/add').post(function (req, res) {
                     console.log('unable to save to database');
                 });
             if (err) throw err;
-            if (senserType === "1") {
+            if ((senserType === "1") && (sen_sort != null) ) {
                 if (pump != sen_sort.pump) {
                     if (pump == '0') {
                         deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
