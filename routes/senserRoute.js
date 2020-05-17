@@ -67,12 +67,16 @@ senserRouter.route('/add').post(function (req, res) {
         console.log(str);
         // var str = req.body.DevEUI_uplink.payload_parsed;
         var data1 = str.split(" ");
+        var serialDevice = data1[0];
         var pH = data1[1] / 10;
         var humidity = data1[2];
         var latitude = req.body.DevEUI_uplink.LrrLAT;
         var longitude = req.body.DevEUI_uplink.LrrLON;
         var pump = data1[3];
-        var serialDevice = data1[0];
+        var pHWater = data1[4] / 100;
+        var senserType = data1[5];
+        console.log(pHWater, " pHWater");
+        console.log(senserType, " senserType");
         notiModel.find({ serialDevice: serialDevice }).countDocuments(function (err, noitnumber) {
             if (noitnumber != 0) {
                 notiModel.findOne({ serialDevice: serialDevice }).sort({ '_id': -1 }).exec(function (err, noti) {
