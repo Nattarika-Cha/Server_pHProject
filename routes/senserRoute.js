@@ -270,7 +270,7 @@ senserRouter.route('/add').post(function (req, res) {
         }
 
         senserModel.findOne({ IMEI: serialDevice }).sort({ '_id': -1 }).exec(function (err, sen_sort) {
-            console.log(sen_sort , " sen_sort")
+            //console.log(sen_sort , " sen_sort")
             var insertDataSenser = {
                 'pH': pH,
                 'moisture': humidity,
