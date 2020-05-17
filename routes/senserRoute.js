@@ -77,203 +77,205 @@ senserRouter.route('/add').post(function (req, res) {
         var senserType = data1[5];
         console.log(pHWater, " pHWater");
         console.log(senserType, " senserType");
-        notiModel.find({ serialDevice: serialDevice }).countDocuments(function (err, noitnumber) {
-            if (noitnumber != 0) {
-                notiModel.findOne({ serialDevice: serialDevice }).sort({ '_id': -1 }).exec(function (err, noti) {
-                    var date_last_noti = noti.date;
-                    var date_now = moment();
-                    var date_next_noti = moment(date_last_noti).add(1, 'hours');
-                    // console.log("Last " + date_last_noti);
-                    // console.log("Now " + date_now);
-                    // console.log("Next " + date_next_noti);
-                    if (date_next_noti < date_now) {
-                        configModel.find({ serialDevice: serialDevice }).countDocuments(function (err, number) {
-                            if (number != 0) {
-                                configModel.findOne({ serialDevice: serialDevice }, function (err, config) {
-                                    var pH_low = config.pH_low;
-                                    var pH_hight = config.pH_hight;
-                                    var humidity_low = config.humidity_low;
-                                    var humidity_hight = config.humidity_hight;
-                                    if (((pH < pH_low) || (pH > pH_hight)) && ((humidity < humidity_low) || (humidity > humidity_hight))) {
-                                        deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
-                                            if (err) { console.log(err); }
-                                            else {
-                                                var token = device.token
-                                                settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
-                                                    if (settingnumber != 0) {
-                                                        settingModel.findOne({ token: token }, function (err, setting) {
-                                                            if (setting.messege == true) {
-                                                                userModel.findOne({ token: token }, function (err, user) {
-                                                                    if (err) { console.log(err); }
-                                                                    else {
-                                                                        var device_token = user.device_token;
-                                                                        var msg = "ค่า pH และค่าความชื้นผิดปกติ โปรดตรวจสอบ";
-                                                                        sendNoti(device_token, serialDevice, msg);
-                                                                        console.log("pH and humidity wrong")
-                                                                    }
-                                                                });
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            }
-                                        })
-                                    } else if ((pH < pH_low) || (pH > pH_hight)) {
-                                        deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
-                                            if (err) { console.log(err); }
-                                            else {
-                                                var token = device.token
-                                                settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
-                                                    if (settingnumber != 0) {
-                                                        settingModel.findOne({ token: token }, function (err, setting) {
-                                                            if (setting.messege == true) {
-                                                                userModel.findOne({ token: token }, function (err, user) {
-                                                                    if (err) { console.log(err); }
-                                                                    else {
-                                                                        var device_token = user.device_token;
-                                                                        var msg = "ค่า pH ผิดปกติ โปรดตรวจสอบ";
-                                                                        sendNoti(device_token, serialDevice, msg);
-                                                                        console.log("pH wrong")
-                                                                    }
-                                                                });
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            }
-                                        })
-                                    } else if ((humidity < humidity_low) || (humidity > humidity_hight)) {
-                                        deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
-                                            if (err) { console.log(err); }
-                                            else {
-                                                var token = device.token
-                                                settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
-                                                    if (settingnumber != 0) {
-                                                        settingModel.findOne({ token: token }, function (err, setting) {
-                                                            if (setting.messege == true) {
-                                                                userModel.findOne({ token: token }, function (err, user) {
-                                                                    if (err) { console.log(err); }
-                                                                    else {
-                                                                        var device_token = user.device_token;
-                                                                        var msg = "ค่าความชื้นผิดปกติ โปรดตรวจสอบ";
-                                                                        sendNoti(device_token, serialDevice, msg);
-                                                                        console.log("humidity wrong")
-                                                                    }
-                                                                });
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            }
-                                        })
-                                    } else {
-                                        console.log("Normal pH and humidity")
-                                    }
-                                });
-                            } else {
-                                console.log("device not yet config");
-                            }
-                        });
-                    } else {
-                        console.log("Noti less one hours");
-                    }
-                });
-            } else {
-                configModel.find({ serialDevice: serialDevice }).countDocuments(function (err, number) {
-                    if (number != 0) {
-                        configModel.findOne({ serialDevice: serialDevice }, function (err, config) {
-                            var pH_low = config.pH_low;
-                            var pH_hight = config.pH_hight;
-                            var humidity_low = config.humidity_low;
-                            var humidity_hight = config.humidity_hight;
-                            if (((pH < pH_low) || (pH > pH_hight)) && ((humidity < humidity_low) || (humidity > humidity_hight))) {
-                                deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
-                                    if (err) { console.log(err); }
-                                    else {
-                                        var token = device.token
-                                        settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
-                                            if (settingnumber != 0) {
-                                                settingModel.findOne({ token: token }, function (err, setting) {
-                                                    if (setting.messege == true) {
-                                                        userModel.findOne({ token: token }, function (err, user) {
-                                                            if (err) { console.log(err); }
-                                                            else {
-                                                                var device_token = user.device_token;
-                                                                var msg = "ค่า pH และค่าความชื้นผิดปกติ โปรดตรวจสอบ";
-                                                                sendNoti(device_token, serialDevice, msg);
-                                                                console.log("pH and humidity wrong")
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            }
-                                        });
-                                    }
-                                })
-                            } else if ((pH < pH_low) || (pH > pH_hight)) {
-                                deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
-                                    if (err) { console.log(err); }
-                                    else {
-                                        var token = device.token
-                                        settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
-                                            if (settingnumber != 0) {
-                                                settingModel.findOne({ token: token }, function (err, setting) {
-                                                    if (setting.messege == true) {
-                                                        userModel.findOne({ token: token }, function (err, user) {
-                                                            if (err) { console.log(err); }
-                                                            else {
-                                                                var device_token = user.device_token;
-                                                                var msg = "ค่า pH ผิดปกติ โปรดตรวจสอบ";
-                                                                sendNoti(device_token, serialDevice, msg);
-                                                                console.log("pH wrong")
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            }
-                                        });
-                                    }
-                                })
-                            } else if ((humidity < humidity_low) || (humidity > humidity_hight)) {
-                                deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
-                                    if (err) { console.log(err); }
-                                    else {
-                                        var token = device.token
-                                        settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
-                                            if (settingnumber != 0) {
-                                                settingModel.findOne({ token: token }, function (err, setting) {
-                                                    if (setting.messege == true) {
-                                                        userModel.findOne({ token: token }, function (err, user) {
-                                                            if (err) { console.log(err); }
-                                                            else {
-                                                                var device_token = user.device_token;
-                                                                var msg = "ค่าความชื้นผิดปกติ โปรดตรวจสอบ";
-                                                                sendNoti(device_token, serialDevice, msg);
-                                                                console.log("humidity wrong")
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            }
-                                        });
-                                    }
-                                })
-                            } else {
-                                console.log("Normal pH and humidity")
-                            }
-                        });
-                    } else {
-                        console.log("device not yet config");
-                    }
-                });
-            }
-        });
-
+        if (senserType === "1") {
+            notiModel.find({ serialDevice: serialDevice }).countDocuments(function (err, noitnumber) {
+                if (noitnumber != 0) {
+                    notiModel.findOne({ serialDevice: serialDevice }).sort({ '_id': -1 }).exec(function (err, noti) {
+                        var date_last_noti = noti.date;
+                        var date_now = moment();
+                        var date_next_noti = moment(date_last_noti).add(1, 'hours');
+                        // console.log("Last " + date_last_noti);
+                        // console.log("Now " + date_now);
+                        // console.log("Next " + date_next_noti);
+                        if (date_next_noti < date_now) {
+                            configModel.find({ serialDevice: serialDevice }).countDocuments(function (err, number) {
+                                if (number != 0) {
+                                    configModel.findOne({ serialDevice: serialDevice }, function (err, config) {
+                                        var pH_low = config.pH_low;
+                                        var pH_hight = config.pH_hight;
+                                        var humidity_low = config.humidity_low;
+                                        var humidity_hight = config.humidity_hight;
+                                        if (((pH < pH_low) || (pH > pH_hight)) && ((humidity < humidity_low) || (humidity > humidity_hight))) {
+                                            deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
+                                                if (err) { console.log(err); }
+                                                else {
+                                                    var token = device.token
+                                                    settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
+                                                        if (settingnumber != 0) {
+                                                            settingModel.findOne({ token: token }, function (err, setting) {
+                                                                if (setting.messege == true) {
+                                                                    userModel.findOne({ token: token }, function (err, user) {
+                                                                        if (err) { console.log(err); }
+                                                                        else {
+                                                                            var device_token = user.device_token;
+                                                                            var msg = "ค่า pH และค่าความชื้นผิดปกติ โปรดตรวจสอบ";
+                                                                            sendNoti(device_token, serialDevice, msg);
+                                                                            console.log("pH and humidity wrong")
+                                                                        }
+                                                                    });
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            })
+                                        } else if ((pH < pH_low) || (pH > pH_hight)) {
+                                            deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
+                                                if (err) { console.log(err); }
+                                                else {
+                                                    var token = device.token
+                                                    settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
+                                                        if (settingnumber != 0) {
+                                                            settingModel.findOne({ token: token }, function (err, setting) {
+                                                                if (setting.messege == true) {
+                                                                    userModel.findOne({ token: token }, function (err, user) {
+                                                                        if (err) { console.log(err); }
+                                                                        else {
+                                                                            var device_token = user.device_token;
+                                                                            var msg = "ค่า pH ผิดปกติ โปรดตรวจสอบ";
+                                                                            sendNoti(device_token, serialDevice, msg);
+                                                                            console.log("pH wrong")
+                                                                        }
+                                                                    });
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            })
+                                        } else if ((humidity < humidity_low) || (humidity > humidity_hight)) {
+                                            deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
+                                                if (err) { console.log(err); }
+                                                else {
+                                                    var token = device.token
+                                                    settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
+                                                        if (settingnumber != 0) {
+                                                            settingModel.findOne({ token: token }, function (err, setting) {
+                                                                if (setting.messege == true) {
+                                                                    userModel.findOne({ token: token }, function (err, user) {
+                                                                        if (err) { console.log(err); }
+                                                                        else {
+                                                                            var device_token = user.device_token;
+                                                                            var msg = "ค่าความชื้นผิดปกติ โปรดตรวจสอบ";
+                                                                            sendNoti(device_token, serialDevice, msg);
+                                                                            console.log("humidity wrong")
+                                                                        }
+                                                                    });
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            })
+                                        } else {
+                                            console.log("Normal pH and humidity")
+                                        }
+                                    });
+                                } else {
+                                    console.log("device not yet config");
+                                }
+                            });
+                        } else {
+                            console.log("Noti less one hours");
+                        }
+                    });
+                } else {
+                    configModel.find({ serialDevice: serialDevice }).countDocuments(function (err, number) {
+                        if (number != 0) {
+                            configModel.findOne({ serialDevice: serialDevice }, function (err, config) {
+                                var pH_low = config.pH_low;
+                                var pH_hight = config.pH_hight;
+                                var humidity_low = config.humidity_low;
+                                var humidity_hight = config.humidity_hight;
+                                if (((pH < pH_low) || (pH > pH_hight)) && ((humidity < humidity_low) || (humidity > humidity_hight))) {
+                                    deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
+                                        if (err) { console.log(err); }
+                                        else {
+                                            var token = device.token
+                                            settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
+                                                if (settingnumber != 0) {
+                                                    settingModel.findOne({ token: token }, function (err, setting) {
+                                                        if (setting.messege == true) {
+                                                            userModel.findOne({ token: token }, function (err, user) {
+                                                                if (err) { console.log(err); }
+                                                                else {
+                                                                    var device_token = user.device_token;
+                                                                    var msg = "ค่า pH และค่าความชื้นผิดปกติ โปรดตรวจสอบ";
+                                                                    sendNoti(device_token, serialDevice, msg);
+                                                                    console.log("pH and humidity wrong")
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    })
+                                } else if ((pH < pH_low) || (pH > pH_hight)) {
+                                    deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
+                                        if (err) { console.log(err); }
+                                        else {
+                                            var token = device.token
+                                            settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
+                                                if (settingnumber != 0) {
+                                                    settingModel.findOne({ token: token }, function (err, setting) {
+                                                        if (setting.messege == true) {
+                                                            userModel.findOne({ token: token }, function (err, user) {
+                                                                if (err) { console.log(err); }
+                                                                else {
+                                                                    var device_token = user.device_token;
+                                                                    var msg = "ค่า pH ผิดปกติ โปรดตรวจสอบ";
+                                                                    sendNoti(device_token, serialDevice, msg);
+                                                                    console.log("pH wrong")
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    })
+                                } else if ((humidity < humidity_low) || (humidity > humidity_hight)) {
+                                    deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
+                                        if (err) { console.log(err); }
+                                        else {
+                                            var token = device.token
+                                            settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
+                                                if (settingnumber != 0) {
+                                                    settingModel.findOne({ token: token }, function (err, setting) {
+                                                        if (setting.messege == true) {
+                                                            userModel.findOne({ token: token }, function (err, user) {
+                                                                if (err) { console.log(err); }
+                                                                else {
+                                                                    var device_token = user.device_token;
+                                                                    var msg = "ค่าความชื้นผิดปกติ โปรดตรวจสอบ";
+                                                                    sendNoti(device_token, serialDevice, msg);
+                                                                    console.log("humidity wrong")
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    })
+                                } else {
+                                    console.log("Normal pH and humidity")
+                                }
+                            });
+                        } else {
+                            console.log("device not yet config");
+                        }
+                    });
+                }
+            });
+        }
 
         senserModel.findOne({ IMEI: serialDevice }).sort({ '_id': -1 }).exec(function (err, sen_sort) {
             var insertDataSenser = {
                 'pH': pH,
                 'moisture': humidity,
+                'WaterpH' : pHWater,
                 'latitude': latitude,
                 'longitude': longitude,
                 'pump': pump,
@@ -289,58 +291,60 @@ senserRouter.route('/add').post(function (req, res) {
                     console.log('unable to save to database');
                 });
             if (err) throw err;
-            if (pump != sen_sort.pump) {
-                if (pump == '0') {
-                    deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
-                        if (err) { console.log(err); }
-                        else {
-                            var token = device.token
-                            settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
-                                if (settingnumber != 0) {
-                                    settingModel.findOne({ token: token }, function (err, setting) {
-                                        if (setting.messege == true) {
-                                            userModel.findOne({ token: token }, function (err, user) {
-                                                if (err) { console.log(err); }
-                                                else {
-                                                    var device_token = user.device_token;
-                                                    var msg = "ปิดการใช้งานปั้มน้ำ";
-                                                    sendNoti_pump(device_token, serialDevice, msg);
-                                                    console.log("Close Pump")
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    })
-                } else if (pump == '1') {
-                    deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
-                        if (err) { console.log(err); }
-                        else {
-                            var token = device.token
-                            settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
-                                if (settingnumber != 0) {
-                                    settingModel.findOne({ token: token }, function (err, setting) {
-                                        if (setting.messege == true) {
-                                            userModel.findOne({ token: token }, function (err, user) {
-                                                if (err) { console.log(err); }
-                                                else {
-                                                    var device_token = user.device_token;
-                                                    var msg = "เปิดการใช้งานปั้มน้ำ";
-                                                    sendNoti_pump(device_token, serialDevice, msg);
-                                                    console.log("Open Pump")
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    })
+            if (senserType === "1") {
+                if (pump != sen_sort.pump) {
+                    if (pump == '0') {
+                        deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
+                            if (err) { console.log(err); }
+                            else {
+                                var token = device.token
+                                settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
+                                    if (settingnumber != 0) {
+                                        settingModel.findOne({ token: token }, function (err, setting) {
+                                            if (setting.messege == true) {
+                                                userModel.findOne({ token: token }, function (err, user) {
+                                                    if (err) { console.log(err); }
+                                                    else {
+                                                        var device_token = user.device_token;
+                                                        var msg = "ปิดการใช้งานปั้มน้ำ";
+                                                        sendNoti_pump(device_token, serialDevice, msg);
+                                                        console.log("Close Pump")
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        })
+                    } else if (pump == '1') {
+                        deviceModel.findOne({ serialDevice: serialDevice }, function (err, device) {
+                            if (err) { console.log(err); }
+                            else {
+                                var token = device.token
+                                settingModel.find({ token: token }).countDocuments(function (err, settingnumber) {
+                                    if (settingnumber != 0) {
+                                        settingModel.findOne({ token: token }, function (err, setting) {
+                                            if (setting.messege == true) {
+                                                userModel.findOne({ token: token }, function (err, user) {
+                                                    if (err) { console.log(err); }
+                                                    else {
+                                                        var device_token = user.device_token;
+                                                        var msg = "เปิดการใช้งานปั้มน้ำ";
+                                                        sendNoti_pump(device_token, serialDevice, msg);
+                                                        console.log("Open Pump")
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        })
+                    }
+                } else {
+                    //console.log("Normal Pump")
                 }
-            } else {
-                //console.log("Normal Pump")
             }
         })
     } else {
