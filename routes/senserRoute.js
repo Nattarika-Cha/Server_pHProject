@@ -75,8 +75,6 @@ senserRouter.route('/add').post(function (req, res) {
         var pump = data1[3];
         var pHWater = data1[4] / 100;
         var senserType = data1[5];
-        console.log(pHWater, " pHWater");
-        console.log(senserType, " senserType");
         if (senserType === "1") {
             notiModel.find({ serialDevice: serialDevice }).countDocuments(function (err, noitnumber) {
                 if (noitnumber != 0) {
@@ -272,6 +270,7 @@ senserRouter.route('/add').post(function (req, res) {
         }
 
         senserModel.findOne({ IMEI: serialDevice }).sort({ '_id': -1 }).exec(function (err, sen_sort) {
+            console.log(sen_sort , " sen_sort")
             var insertDataSenser = {
                 'pH': pH,
                 'moisture': humidity,
